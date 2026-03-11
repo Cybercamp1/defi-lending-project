@@ -10,6 +10,12 @@ The codebase implements a complete ecosystem facilitating lending and borrowing 
 2. **`InterestRateModel.sol`**: Calculates borrow and supply yields based on the "Utilization Rate" of the pool (funds borrowed / total funds). Implements a double-slope model to incentivize supplying at a specific `kink` rate.
 3. **`CollateralManager.sol`**: Evaluates LTV (Loan-To-Value) and Liquidation Thresholds securely combined with Oracle mocked prices.
 4. **`Liquidation.sol`**: Handles underwater loans directly, allowing liquidators to clear bad debt and seize borrower's collateral with a $5\%$ premium.
+<img width="1578" height="766" alt="image" src="https://github.com/user-attachments/assets/fc0d348b-42c7-4f83-bd95-717d6bd327fd" />
+
+
+
+
+   
 
 ## 🧮 Math Logic Used
 
@@ -30,3 +36,5 @@ Since this project uses modern `@openzeppelin/contracts`, you can easily build b
 npm install
 npm run compile
 ```
+
+

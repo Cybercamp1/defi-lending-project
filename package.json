@@ -1,0 +1,14 @@
+{
+  "name": "defi-lending-protocol",
+  "version": "1.0.0",
+  "description": "A basic DeFi Lending Protocol with deposit, borrow, interest calculation, collateral manager and liquidation system.",
+  "scripts": {
+    "compile": "hardhat compile"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  },
+  "devDependencies": {
+    "hardhat": "^2.19.0"
+  }
+}

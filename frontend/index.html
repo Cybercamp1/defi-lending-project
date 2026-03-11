@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraLend - The next-generation decentralized lending protocol.">
+    <title>AuraLend | DeFi Lending Protocol</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background Gobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <span class="logo-icon">💠</span> AuraLend
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Markets</a>
+                <a href="#">Governance</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="network-badge">
+                <span class="dot"></span> Ethereum
+            </div>
+            <button id="connectWalletBtn" class="btn-primary glow-effect">Connect Wallet</button>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header glass-panel">
+            <div class="stat-box">
+                <span class="stat-label">Net Worth</span>
+                <h2 class="stat-value" id="netWorthDisplay">$0.00</h2>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Net APY</span>
+                <h2 class="stat-value text-gradient" id="netApyDisplay">--</h2>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Health Factor</span>
+                <div class="health-factor-container">
+                    <h2 class="stat-value text-success" id="healthFactorDisplay">∞</h2>
+                    <div class="health-bar-bg">
+                        <div class="health-bar-fill" id="healthBarFill" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Position Grid -->
+        <div class="position-grid">
+            <!-- Supplies Column -->
+            <div class="column">
+                <div class="glass-panel w-full">
+                    <div class="panel-header">
+                        <h3>Your Supplies</h3>
+                        <span class="badge" id="totalSuppliedBadge">Balance: $0.00</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="assets-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Balance</th>
+                                    <th>APY</th>
+                                    <th>Collateral</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="userSuppliesList">
+                                <tr>
+                                    <td colspan="5" class="empty-state">Nothing supplied yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glass-panel w-full mt-4">
+                    <div class="panel-header">
+                        <h3>Assets to Supply</h3>
+                    </div>
+                    <div class="table-container">
+                        <table class="assets-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Wallet Balance</th>
+                                    <th>APY</th>
+                                    <th>Can be collateral</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="assetsToSupplyList">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Borrows Column -->
+            <div class="column">
+                <div class="glass-panel w-full">
+                    <div class="panel-header">
+                        <h3>Your Borrows</h3>
+                        <span class="badge" id="totalBorrowedBadge">Borrowed: $0.00</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="assets-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Debt</th>
+                                    <th>APY</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="userBorrowsList">
+                                <tr>
+                                    <td colspan="4" class="empty-state">Nothing borrowed yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glass-panel w-full mt-4">
+                    <div class="panel-header">
+                        <h3>Assets to Borrow</h3>
+                    </div>
+                    <div class="table-container">
+                        <table class="assets-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Available</th>
+                                    <th>APY</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="assetsToBorrowList">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Interactive Modal -->
+    <div id="actionModal" class="modal-overlay hidden">
+        <div class="modal glass-panel">
+            <div class="modal-header">
+                <h3 id="modalTitle">Action</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="asset-info-large">
+                    <span id="modalAssetIcon" class="asset-icon-large"></span>
+                    <h2 id="modalAssetName">Asset</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label>Amount</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="modalAmountInput" placeholder="0.00" step="0.01">
+                        <button class="max-btn" id="maxBtn">MAX</button>
+                    </div>
+                    <div class="input-footer">
+                        <span>Balance: <span id="modalMaxBalance">0.00</span></span>
+                    </div>
+                </div>
+
+                <div class="tx-details">
+                    <div class="tx-row">
+                        <span>New Health Factor</span>
+                        <span id="modalNewHealth" class="text-success">--</span>
+                    </div>
+                </div>
+
+                <button id="modalActionBtn" class="btn-primary w-full mt-4 glow-effect">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification system -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,5 +1,9 @@
-# Show Solidity
+cat > .gitattributes << 'EOF'
 *.sol linguist-language=Solidity
 *.sol linguist-detectable=true
-
-
+*.js linguist-detectable=true
+*.html linguist-detectable=true
+*.css linguist-detectable=true
+*.json linguist-detectable=false
+*.lock linguist-detectable=false
+EOF

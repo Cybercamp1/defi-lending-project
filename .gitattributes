@@ -1,3 +1,17 @@
+# Show Solidity
 *.sol linguist-language=Solidity
-*.js linguist-detectable=false
+*.sol linguist-detectable=true
+
+# Show JavaScript
+*.js linguist-detectable=true
+
+# Show HTML
+*.html linguist-detectable=true
+
+# Show CSS
+*.css linguist-detectable=true
+
+# Hide unnecessary files
 *.json linguist-detectable=false
+*.lock linguist-detectable=false
+*.md linguist-detectable=false
